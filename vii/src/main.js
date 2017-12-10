@@ -15,13 +15,15 @@ Vue.use(VueI18n)
 Vue.use(VueCordova)
 
 //i18n
+const sysLan = window.navigator.language.split('-')[0];
 const i18n = new VueI18n({
-  locale: 'zh',
+  locale: sysLan,
   messages:{
     'zh': require('./assets/lang/zh.js'),
     'en': require('./assets/lang/en.js')
   }
 })
+// this.$i18n.locale = 'en'
 
 // REM Response Type
 const W = document.documentElement.clientWidth;

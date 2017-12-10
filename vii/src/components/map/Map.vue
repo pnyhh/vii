@@ -9,7 +9,7 @@
     export default {
       data () {
           return {
-            title: "高德地图",
+            title: this.$t('tab.map'),
             W: document.documentElement.clientWidth,
             H: 0,
             lng: 116.39,
@@ -27,7 +27,7 @@
           let that = this;
           let map = new AMap.Map('mapContainer',{
             resizeEnable: true,
-            zoom: 13,
+            zoom: 12,
             center: [that.lng,that.lat]
           });
           map.plugin('AMap.Geolocation', function () {
