@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <mt-tabbar v-model="activeTab">
+    <Ad v-show="false" v-on:hideTabbarFn="hideTabbarFn"></Ad>
+    <mt-tabbar v-model="activeTab" v-show="!hideTabbar">
       <mt-tab-item id="map">
         <i class="tab tab-map" v-bind:class="{ 'tab-map-active': activeTab == 'map' }"></i>
         {{ $t('tab.map') }}
@@ -23,12 +24,14 @@
 </template>
 
 <script>
+import Ad from '@/components/common/Ad'
 export default {
   data () {
     return {
       name: 'app',
       msg: 'VUE Application',
       activeTab: 'resource',
+      hideTabbar: false,
       param:{
         id: 1,
         text:'I`m been send from that page'
@@ -39,11 +42,19 @@ export default {
     activeTab:function (val) {
       switch (val){
         case 'map': this.$router.push({ name: 'map',params: {param: this.param}});break;
-        case 'resource': this.$router.push('/');break;
+        case 'resource': this.$router.push('/resource');break;
         case 'order': this.$router.push('order');break;
         case 'me': this.$router.push('me');break;
         default: return null;
       }
+    }
+  },
+  components: {
+    Ad
+  },
+  methods: {
+    hideTabbarFn:function (data) {
+      this.hideTabbar = data;
     }
   }
 }

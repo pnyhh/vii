@@ -19,11 +19,40 @@ export default {
       msg: 'An VUE Application'
     }
   },
+  mounted(){
+    this.$root.axssss = 123;
+  },
   methods:{
     testMint(){
-      this.$toast({
-        message: 'Mint-UI working...',
-        duration: 2000
+      var that = this;
+      this.$axios.get(this.$Config.SERVER + this.$Config.GET_PROFILE, {
+        params: {
+          login_name: 'admin'
+        }
+      })
+      .then(function (response) {
+        if(response.data.header.opCode && response.data.body){
+          let res = response.data.body;
+          that.$toast({
+            message: res.data[0].nickname + ' ' + that.$t( 'tip.query' ) + that.$t( 'tip.success' ),
+            position: 'middle',
+            duration: 3000
+          })
+        }else{
+          that.$toast({
+            message: that.$t( 'tip.query' ) + that.$t( 'tip.fail' ),
+            position: 'middle',
+            duration: 3000
+          })
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+        that.$toast({
+          message: that.$t( 'tip.query' ) + that.$t( 'tip.fail' ),
+          position: 'middle',
+          duration: 3000
+        })
       });
     }
   }

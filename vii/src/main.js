@@ -7,12 +7,23 @@ import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
 import VueI18n from 'vue-i18n'
 import VueCordova from 'vue-cordova'
+import axios from 'axios'
+import md5 from 'js-md5';
+import qs from 'qs';
+
+import Config from './config'
+import Storage from './storage'
 
 Vue.config.productionTip = false
 
 Vue.use(MintUI)
 Vue.use(VueI18n)
 Vue.use(VueCordova)
+Vue.prototype.$axios = axios
+Vue.prototype.$Config = Config
+Vue.prototype.$Storage = Storage
+Vue.prototype.$md5 = md5
+Vue.prototype.$qs = qs
 
 //i18n
 const sysLan = window.navigator.language.split('-')[0];
